@@ -12,19 +12,69 @@ function rectangularCollision({ rectangular1, rectangular2 }) {
 }
 
 function determinWinner({ player, enmy, timerId }) {
-  document.querySelector("#resultOfGame").style.display = "flex";
+  let gameResault = document.querySelector("#resultOfGame");
+  gameResault.style.display = "flex";
   clearTimeout(timerId);
   if (player.health === enmy.health) {
-    document.querySelector("#resultOfGame").innerHTML = "Tie";
+    gameResault.innerHTML = "Tie";
   } else if (player.health > enmy.health) {
     // enmy.switchSprite("death");
-    document.querySelector("#resultOfGame").innerHTML = "Player 1 Wins";
+    gameResault.innerHTML = "Player 1 Wins";
   } else if (player.health < enmy.health) {
-    document.querySelector("#resultOfGame").innerHTML = "Player 2 Wins";
+    gameResault.innerHTML = "Player 2 Wins";
   }
+  
+  // update the flag to stop game with the timmer
+  matchEnd = true;
+  // add button for rematch 
+  gameResault.innerHTML += `<button onclick="rematch()" style="
+                                background: red;
+                                color: white;
+                                font-weight: bold;
+                                padding: 10px;
+                                width: 200px;
+                                margin: 10px;
+                                box-shadow: 5px 5px 5px  rgba(0,0,0,0.8);
+                                border: none;
+                                border-radius: 20px;
+                                cursor:pointer;
+                            ">Rematch</button>`
 }
-let timer = 51;
+
+function resetFighter(fighter, initialPosition){
+  fighter.possition = { ...initialPosition };
+  fighter.currentFrame = 0;
+  fighter.framesElapsed = 0 ;
+  if(fighter == bird)
+    return
+  fighter.velocity = { x: 0, y: 0 };
+  fighter.health = 100;
+  fighter.img = fighter.sprites.idle.img;
+  fighter.dead = false;
+  fighter.isAttacking = false;
+  console.log(fighter,fighter==enmy);
+
+}
+
+function rematch(){
+  matchEnd = false;
+  timer = 10;
+  resetFighter(bird,  { x: 50, y: 100 });
+
+  resetFighter(player1, { x: 0, y: 0 });
+  document.querySelector('#playerHealth').style.width ='100%';
+  
+  document.querySelector('#enemyHealth').style.width ='100%';
+
+  resetFighter(enmy,  { x: 450, y: 100 });
+  document.querySelector("#resultOfGame").innerHTML = ''; 
+  window.requestAnimationFrame(animate);
+  decreaseTimer();
+}
+
+let timer = 10;
 let timerId;
+
 function decreaseTimer() {
   if (timer > 0) {
     timerId = setTimeout(decreaseTimer, 1000);

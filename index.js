@@ -1,6 +1,8 @@
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext("2d");
 
+let matchEnd = false;
+
 canvas.width = 1024;
 canvas.height = 576;
 
@@ -348,7 +350,7 @@ function animate() {
     // console.log("Enmy Attack");
   }
 
-  if (enmy.health <= 0 || player1.health <= 0) {
+  if ((enmy.health <= 0 || player1.health <= 0 )&& !matchEnd) {
     determinWinner({
       player: player1,
       enmy: enmy,
@@ -360,7 +362,7 @@ function animate() {
 animate();
 
 window.addEventListener("keydown", (e) => {
-  if (!player1.dead) {
+  if (!player1.dead && !matchEnd) {
     switch (e.key) {
       case "d":
         keys.d.pressed = true;
@@ -393,7 +395,7 @@ window.addEventListener("keydown", (e) => {
         break;
     }
   }
-  if (!enmy.dead) {
+  if (!enmy.dead && !matchEnd) {
     //enmy movement
     switch (e.key) {
       case "ArrowRight":
@@ -439,7 +441,7 @@ window.addEventListener("keydown", (e) => {
 });
 
 window.addEventListener("keyup", (e) => {
-  switch (e.key) {
+  switch (e.key ) {
     case "d":
       keys.d.pressed = false;
       break;

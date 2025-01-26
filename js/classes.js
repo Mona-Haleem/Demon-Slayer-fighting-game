@@ -176,7 +176,7 @@ class Fighter extends Sprite {
     // }, 1000);
   }
   switchSprite(sprite) {
-    if (this.img === this.sprites.death.img) {
+    if (this.img === this.sprites.death.img ) {
       if (this.currentFrame === this.sprites.death.framesMax - 1) {
         this.dead = true;
       }
@@ -312,4 +312,5 @@ class Fighter extends Sprite {
         break;
     }
   }
+
 }

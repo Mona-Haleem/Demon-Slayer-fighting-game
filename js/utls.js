@@ -45,8 +45,6 @@ function resetFighter(fighter, initialPosition){
   fighter.possition = { ...initialPosition };
   fighter.currentFrame = 0;
   fighter.framesElapsed = 0 ;
-  if(fighter == bird)
-    return
   fighter.velocity = { x: 0, y: 0 };
   fighter.health = 100;
   fighter.img = fighter.sprites.idle.img;
@@ -59,8 +57,6 @@ function resetFighter(fighter, initialPosition){
 function rematch(){
   matchEnd = false;
   timer = 10;
-  resetFighter(bird,  { x: 50, y: 100 });
-
   resetFighter(player1, { x: 0, y: 0 });
   document.querySelector('#playerHealth').style.width ='100%';
   

@@ -56,7 +56,7 @@ function resetFighter(fighter, initialPosition){
 
 function rematch(){
   matchEnd = false;
-  timer = 10;
+  timer = 51;
   resetFighter(player1, { x: 0, y: 0 });
   document.querySelector('#playerHealth').style.width ='100%';
   
@@ -68,7 +68,7 @@ function rematch(){
   decreaseTimer();
 }
 
-let timer = 10;
+let timer = 51;
 let timerId;
 
 function decreaseTimer() {
